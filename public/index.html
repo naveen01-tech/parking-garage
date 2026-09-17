@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ParkEasy | Parking Garage</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <div class="brand">Park<span>Easy</span></div>
+        <nav class="nav">
+          <button id="menuToggle" class="menu-toggle" type="button" aria-controls="dashboardTabs" aria-expanded="false" aria-label="Open navigation menu">
+            <span></span><span></span><span></span>
+          </button>
+          <button id="logoutBtn" class="primary" type="button">Logout</button>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section id="authPage" class="section">
+        <div class="auth-stage">
+          <div class="auth-panel">
+            <div class="auth-heading">
+              <div class="auth-mark">P</div>
+              <div class="eyebrow">ParkEasy</div>
+              <h1>Welcome back</h1>
+              <p>Sign in to manage your parking garage.</p>
+            </div>
+
+            <div class="tab-switch" role="tablist" aria-label="Authentication">
+              <button id="loginTab" class="active" type="button" role="tab">Login</button>
+              <button id="registerTab" type="button" role="tab">Signup</button>
+            </div>
+
+            <form id="loginForm">
+              <div class="field">
+                <label for="loginEmail">Email</label>
+                <input id="loginEmail" type="email" placeholder="you@example.com" />
+              </div>
+              <div class="field">
+                <label for="loginPassword">Password</label>
+                <input id="loginPassword" type="password" placeholder="••••••••" />
+              </div>
+              <button class="btn" type="submit" style="width:100%">Login</button>
+            </form>
+
+            <form id="registerForm" class="hidden">
+              <div class="form-row">
+                <div class="field">
+                  <label for="registerName">Name</label>
+                  <input id="registerName" type="text" placeholder="Jane Doe" />
+                </div>
+                <div class="field">
+                  <label for="registerEmail">Email</label>
+                  <input id="registerEmail" type="email" placeholder="you@example.com" />
+                </div>
+              </div>
+              <div class="field">
+                <label for="registerPassword">Password</label>
+                <input id="registerPassword" type="password" placeholder="••••••••" />
+              </div>
+              <button class="btn" type="submit" style="width:100%">Signup</button>
+            </form>
+
+            <div id="statusMessage" class="status">Use the form to continue.</div>
+            <div class="auth-data-hooks" aria-hidden="true">
+              <span id="availableValue">0</span>
+              <span id="occupiedValue">0</span>
+              <span id="evFreeValue">0</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="dashboardPage" class="section hidden">
+        <div class="container">
+          <div id="dashboardTabs" class="dashboard-tabs" aria-label="Parking operations navigation">
+            <button class="dashboard-tab active" data-dashboard-tab="check-in" type="button">Check-In</button>
+            <button class="dashboard-tab" data-dashboard-tab="check-out" type="button">Check-Out</button>
+            <button class="dashboard-tab" data-dashboard-tab="search" type="button">Vehicle Search</button>
+            <button class="dashboard-tab" data-dashboard-tab="history" type="button">Parking History</button>
+          </div>
+
+          <div class="dashboard-grid">
+            <div id="checkInPanel" class="card feature-panel">
+              <h3>Check-In</h3>
+              <form id="checkInForm">
+                <div class="field">
+                  <label for="checkinGarageId">Garage ID</label>
+                  <input id="checkinGarageId" type="number" value="1" />
+                </div>
+                <div class="field">
+                  <label for="checkinPlate">Plate</label>
+                  <input id="checkinPlate" type="text" placeholder="RJ 42 4153" />
+                </div>
+                <div class="field">
+                  <label for="checkinVehicleType">Vehicle Type</label>
+                  <select id="checkinVehicleType">
+                    <option value="COMPACT">COMPACT</option>
+                    <option value="STANDARD">STANDARD</option>
+                    <option value="EV">EV</option>
+                  </select>
+                </div>
+                <button class="btn" type="submit" style="width:100%">Check In</button>
+              </form>
+              <div id="checkInResult" class="result-box">Status will appear here.</div>
+            </div>
+
+            <div id="checkOutPanel" class="card feature-panel hidden">
+              <h3>Check-Out</h3>
+              <form id="checkOutForm">
+                <div class="field">
+                  <label for="checkoutPlate">Plate</label>
+                  <input id="checkoutPlate" type="text" placeholder="ABC-123" />
+                </div>
+                <div class="field">
+                  <label for="checkoutHours">Hours</label>
+                  <input id="checkoutHours" type="number" min="0" step="0.5" value="2" />
+                </div>
+                <button class="btn" type="submit" style="width:100%">Check Out</button>
+              </form>
+              <div id="checkoutResult" class="result-box">Your receipt will appear here after checkout.</div>
+            </div>
+
+            <div id="searchPanel" class="card feature-panel hidden">
+              <h3>Vehicle Search</h3>
+              <form id="searchForm">
+                <div class="field">
+                  <label for="searchPlate">Plate</label>
+                  <input id="searchPlate" type="text" placeholder="RJ 42 4153" />
+                </div>
+                <button class="btn" type="submit" style="width:100%">Search</button>
+              </form>
+              <div id="searchResult" class="result-box">Search result will appear here.</div>
+            </div>
+
+            <div id="historyPanel" class="card feature-panel hidden">
+              <h3>Parking History</h3>
+              <form id="historyForm">
+                <div class="form-row">
+                  <div class="field">
+                    <label for="historyPage">Page</label>
+                    <input id="historyPage" type="number" min="1" value="1" />
+                  </div>
+                  <div class="field">
+                    <label for="historyLimit">Limit</label>
+                    <input id="historyLimit" type="number" min="1" value="10" />
+                  </div>
+                </div>
+                <button class="btn" type="submit" style="width:100%">Load History</button>
+              </form>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Plate</th>
+                      <th>Status</th>
+                      <th>Fee</th>
+                    </tr>
+                  </thead>
+                  <tbody id="historyTableBody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
